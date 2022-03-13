@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+/*font-family: 'Press Start 2P', cursive;*/
+
 .dino{
     width: 60px;
     height: 60px;
-    background-color: green;
+    background-image: url(image/dino.png);
     position: absolute;
     bottom: 0px;
 }
@@ -11,5 +14,35 @@
     width: 60px;
     height: 60px;
     bottom: 0;
-    background: red;
+    background: url(image/cactus.png);
+}
+
+.game-over{
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    margin-top: 22%;
+}
+
+.restart{
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+}
+
+.background{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+    background-image: url(image/background.png);
+    background-repeat: repeat-x;
+    animation: background-animation 600s infinite linear;
+}
+
+@keyframes background-animation {
+    from{
+        background-position: 70000%;
+    }
+    to{
+        background-position: 0;
+    }
 }

@@ -1,9 +1,10 @@
 const dino = document.querySelector(".dino");
 const background = document.querySelector(".background");
 let itsJumping = false;
+let position = 0;
+let isRunning = true;
 
 function jump(){
-    let position = 0;
     itsJumping = true;
     let upInterval = setInterval(() => {
         if(position >= 180){
@@ -25,7 +26,7 @@ function jump(){
     }, 15)
 }
 
-function handleKeyUp(event){
+function handleSpacePress(event){
     if(event.keyCode === 32){
         if(!itsJumping){
             jump();
@@ -33,9 +34,15 @@ function handleKeyUp(event){
     }
 }
 
+function handleEnterPress(event){
+    if(event.keyCode === 13 && isRunning === false){
+        window.location.reload();
+    }
+}
+
 function createCactus(){
     const cactus = document.createElement("div");
-    let cactusPosition = 1000;
+    let cactusPosition = window.innerWidth + 60;
     let randomTime = Math.random() * 5000;
 
     cactus.classList.add("cactus");
@@ -46,6 +53,10 @@ function createCactus(){
         if(cactusPosition < -60){
             clearInterval(leftInterval);
             background.removeChild(cactus);
+        }else if(cactusPosition > 0 && cactusPosition < 60 && position < 60){
+            clearInterval(leftInterval);
+            document.body.innerHTML = '<h1 class="game-over">Game over</h1><p class="restart">Press ENTER to restart</p>';
+            isRunning = false;
         }else{
             cactusPosition -= 10;
             cactus.style.left = cactusPosition + "px";
@@ -57,4 +68,5 @@ function createCactus(){
 
 createCactus();
 
-document.addEventListener('keyup', handleKeyUp);
+document.addEventListener('keypress', handleSpacePress);
+document.addEventListener('keypress', handleEnterPress)
